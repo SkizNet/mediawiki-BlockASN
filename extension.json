@@ -1,0 +1,36 @@
+{
+	"name": "BlockASN",
+	"version": "1.0.0",
+	"author": [
+		"Ryan Schmidt"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:BlockASN",
+	"descriptionmsg": "blockasn-desc",
+	"license-name": "MIT",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
+	"config": {
+		"BAApiField": {
+			"asn": "traits.autonomous_system_number",
+			"type": "traits.user_type"
+		},
+		"BlockedASNs": [],
+		"BlockedUserTypes": []
+	},
+	"MessagesDirs": {
+		"BlockASN": [
+			"i18n"
+		]
+	},
+	"Hooks": {
+		"GetBlockedStatus": [
+			"BlockASN::onGetBlockedStatus"
+		]
+	},
+	"AutoloadClasses": {
+		"BlockASN": "BlockASN.php"
+	},
+	"manifest_version": 1
+}
