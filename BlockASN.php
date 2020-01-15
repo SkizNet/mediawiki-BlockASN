@@ -29,7 +29,7 @@ class BlockASN extends User {
 				$user->mBlock = new Block( [
 					'address' => $ip,
 					'byText' => 'MediaWiki default',
-					'reason' => wfMessage( 'usertypeblockreason', $ret )->text(),
+					'reason' => wfMessage( 'blockasn-usertypeblockreason', $ret )->text(),
 					'allowUsertalk' => true,
 					'createAccount' => true, // this BLOCKS account creation
 					'systemBlock' => 'usertype-block'
@@ -57,10 +57,50 @@ class BlockASN extends User {
 				$user->mBlock = new Block( [
 					'address' => $ip,
 					'byText' => 'MediaWiki default',
-					'reason' => wfMessage( 'asnblockreason' )->text(),
+					'reason' => wfMessage( 'blockasn-asnblockreason' )->text(),
 					'allowUsertalk' => true,
 					'createAccount' => true, // this BLOCKS account creation
 					'systemBlock' => 'asn-block'
+				] );
+				$user->mBlockedby = $user->mBlock->getByName();
+				$user->mBlockreason = $user->mBlock->mReason;
+				$user->mHideName = $user->mBlock->mHideName;
+				$user->mAllowUsertalk = !$user->mBlock->prevents( 'editownusertalk' );
+				return true;
+			}
+
+			$ret = $data;
+			if ( !is_array( $wgBAApiField['proxy'] ) ) {
+				$pfields = [ $wgBAApiField['proxy'] ];
+			} else {
+				$pfields = $wgBAApiField['proxy'];
+			}
+
+			foreach ( $pfields as $field ) {
+				$fragments = explode( '.', $fields );
+
+				foreach ( $fragments as $f ) {
+					if ( !isset( $ret[$f] ) ) {
+						$ret = false;
+						break;
+					}
+
+					$ret = $ret[$f];
+				}
+
+				if ( $ret === true ) {
+					break;
+				}
+			}
+
+			if ( $ret === true ) {
+				$user->mBlock = new Block( [
+					'address' => $ip,
+					'byText' => 'MediaWiki default',
+					'reason' => wfMessage( 'blockasn-proxyblockreason', $ret )->text(),
+					'allowUsertalk' => true,
+					'createAccount' => true, // this BLOCKS account creation
+					'systemBlock' => 'usertype-block'
 				] );
 				$user->mBlockedby = $user->mBlock->getByName();
 				$user->mBlockreason = $user->mBlock->mReason;
@@ -86,11 +126,9 @@ class BlockASN extends User {
 		if ( !in_array( $db, array( 'country', 'city', 'insights' ) ) ) {
 			return array( 'error' => 'UNKNOWN_DATABASE' );
 		}
-		// first check memcached for the (ip, db) combo
+		// first check cache for the (ip, db) combo
 		// results are cached for 1 week
-		$cache = new Memcached();
-		$cache->setOption( Memcached::OPT_COMPRESSION, false ); // compression bugs out sometimes
-		$cache->addServer( '127.0.0.1', 11211 );
+		$cache = wfGetMainCache();
 		$cached_data = $cache->get( "geoip_{$db}_" . sha1( $ip ) );
 
 		if ( $cached_data === false || !isset( $cached_data['cache_epoch'] ) || $cached_data['cache_epoch'] < $cache_epoch ) {

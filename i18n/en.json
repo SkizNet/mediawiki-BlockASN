@@ -1,5 +1,6 @@
 {
 	"blockasn-desc": "Block ASNs",
-	"usertypeblockreason": "Your IP address is blocked due to it belonging to a disallowed IP type ($1).",
-	"asnblockreason": "Your IP address belongs to a blocked ASN."
+	"blockasn-usertypeblockreason": "Your IP address is blocked due to it belonging to a disallowed IP type ($1).",
+	"blockasn-asnblockreason": "Your IP address belongs to a blocked ASN.",
+	"blockasn-proxyblockreason": "Your IP address is blocked due to belonging to an anonymizer or VPN service."
 }

@@ -1,6 +1,6 @@
 {
 	"name": "BlockASN",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": [
 		"Ryan Schmidt"
 	],
@@ -14,6 +14,12 @@
 	"config": {
 		"BAApiField": {
 			"asn": "traits.autonomous_system_number",
+			"proxy": [
+				"traits.is_anonymous_vpn",
+				"traits.is_hosting_provider",
+				"traits.is_public_proxy",
+				"traits.is_tor_exit_node"
+			],
 			"type": "traits.user_type"
 		},
 		"BlockedASNs": [],
