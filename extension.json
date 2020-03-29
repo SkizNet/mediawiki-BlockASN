@@ -1,6 +1,6 @@
 {
 	"name": "BlockASN",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"author": [
 		"Ryan Schmidt"
 	],
@@ -9,21 +9,42 @@
 	"license-name": "MIT",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.27.0"
+		"MediaWiki": ">= 1.35.0"
 	},
 	"config": {
 		"BAApiField": {
-			"asn": "traits.autonomous_system_number",
-			"proxy": [
-				"traits.is_anonymous_vpn",
-				"traits.is_hosting_provider",
-				"traits.is_public_proxy",
-				"traits.is_tor_exit_node"
-			],
-			"type": "traits.user_type"
+			"description": "Fields in the geoip response to fetch data from",
+			"value": {
+				"asn": "traits.autonomous_system_number",
+				"proxy": [
+					"traits.is_anonymous_vpn",
+					"traits.is_hosting_provider",
+					"traits.is_public_proxy",
+					"traits.is_tor_exit_node"
+				],
+				"type": "traits.user_type"
+			}
 		},
-		"BlockedASNs": [],
-		"BlockedUserTypes": []
+		"BAMMuser": {
+			"description": "MaxMind API username",
+			"value": "",
+			"public": false
+		},
+		"BAMMpass": {
+			"description": "MaxMind API token",
+			"value": "",
+			"public": false
+		},
+		"BlockedASNs": {
+			"description": "List of blocked ASNs",
+			"value": [],
+			"public": false
+		},
+		"BlockedUserTypes": {
+			"description": "List of blocked User Types",
+			"value": [],
+			"public": false
+		}
 	},
 	"MessagesDirs": {
 		"BlockASN": [
@@ -31,8 +52,8 @@
 		]
 	},
 	"Hooks": {
-		"GetBlockedStatus": [
-			"BlockASN::onGetBlockedStatus"
+		"GetUserBlock": [
+			"BlockASN::onGetUserBlock"
 		]
 	},
 	"AutoloadClasses": {

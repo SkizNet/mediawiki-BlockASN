@@ -1,20 +1,32 @@
 <?php
 
-// extending User lets us modify protected fields (yes, it's hacky as shit)
-class BlockASN extends User {
-	public static function onGetBlockedStatus( &$user ) {
-		global $wgBlockedASNs, $wgBlockedUserTypes, $wgBAApiField;
+use MediaWiki\Block\CompositeBlock;
+use MediaWiki\Block\SystemBlock;
+use MediaWiki\MediaWikiServices;
 
-		if ( $user->isAllowed( 'ipblock-exempt' ) ) {
-			return true;
+class BlockASN {
+	/**
+	 * @param User $user User to check blocks for
+	 * @param string|null $ip User IP address, or null if we're not checking
+	 * 		the global user or the user is ipblock-exempt.
+	 * @param AbstractBlock|null &$block The block applying to the user
+	 */
+	public static function onGetUserBlock( User $user, $ip, &$block ) {
+		if ( $ip === null ) {
+			// user is ipblock-exempt or we aren't checking the user matching the request
+			return;
 		}
 
-		$ip = $user->getRequest()->getIP();
 		$data = self::getData( $ip );
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$apiField = $config->get( 'BAApiField' );
+		$blockedASNs = $config->get( 'BlockedASNs' );
+		$blockedUserTypes = $config->get( 'BlockedUserTypes' );
+		$asnBlocks = [];
 
 		if ( $data !== -1 ) {
 			$ret = $data;
-			$fragments = explode( '.', $wgBAApiField['type'] );
+			$fragments = explode( '.', $apiField['type'] );
 
 			foreach ( $fragments as $f ) {
 				if ( !isset( $ret[$f] ) ) {
@@ -25,24 +37,16 @@ class BlockASN extends User {
 				$ret = $ret[$f];
 			}
 
-			if ( $ret !== -1 && in_array( $ret, $wgBlockedUserTypes ) ) {
-				$user->mBlock = new Block( [
+			if ( $ret !== -1 && in_array( $ret, $blockedUserTypes ) ) {
+				$asnBlocks[] = new SystemBlock( [
 					'address' => $ip,
-					'byText' => 'MediaWiki default',
-					'reason' => wfMessage( 'blockasn-usertypeblockreason', $ret )->text(),
-					'allowUsertalk' => true,
-					'createAccount' => true, // this BLOCKS account creation
+					'reason' => new Message( 'blockasn-usertypeblockreason', [ $ret ] ),
 					'systemBlock' => 'usertype-block'
 				] );
-				$user->mBlockedby = $user->mBlock->getByName();
-				$user->mBlockreason = $user->mBlock->mReason;
-				$user->mHideName = $user->mBlock->mHideName;
-				$user->mAllowUsertalk = !$user->mBlock->prevents( 'editownusertalk' );
-				return true;
 			}
 
 			$ret = $data;
-			$fragments = explode( '.', $wgBAApiField['asn'] );
+			$fragments = explode( '.', $apiField['asn'] );
 
 			foreach ( $fragments as $f ) {
 				if ( !isset( $ret[$f] ) ) {
@@ -53,31 +57,23 @@ class BlockASN extends User {
 				$ret = $ret[$f];
 			}
 
-			if ( $ret !== -1 && in_array( $ret, $wgBlockedASNs ) ) {
-				$user->mBlock = new Block( [
+			if ( $ret !== -1 && in_array( $ret, $blockedASNs ) ) {
+				$asnBlocks[] = new SystemBlock( [
 					'address' => $ip,
-					'byText' => 'MediaWiki default',
-					'reason' => wfMessage( 'blockasn-asnblockreason' )->text(),
-					'allowUsertalk' => true,
-					'createAccount' => true, // this BLOCKS account creation
+					'reason' => new Message( 'blockasn-asnblockreason' ),
 					'systemBlock' => 'asn-block'
 				] );
-				$user->mBlockedby = $user->mBlock->getByName();
-				$user->mBlockreason = $user->mBlock->mReason;
-				$user->mHideName = $user->mBlock->mHideName;
-				$user->mAllowUsertalk = !$user->mBlock->prevents( 'editownusertalk' );
-				return true;
 			}
 
 			$ret = $data;
-			if ( !is_array( $wgBAApiField['proxy'] ) ) {
-				$pfields = [ $wgBAApiField['proxy'] ];
+			if ( !is_array( $apiField['proxy'] ) ) {
+				$pfields = [ $apiField['proxy'] ];
 			} else {
-				$pfields = $wgBAApiField['proxy'];
+				$pfields = $apiField['proxy'];
 			}
 
 			foreach ( $pfields as $field ) {
-				$fragments = explode( '.', $fields );
+				$fragments = explode( '.', $field );
 
 				foreach ( $fragments as $f ) {
 					if ( !isset( $ret[$f] ) ) {
@@ -94,53 +90,61 @@ class BlockASN extends User {
 			}
 
 			if ( $ret === true ) {
-				$user->mBlock = new Block( [
+				$asnBlocks[] = new SystemBlock( [
 					'address' => $ip,
-					'byText' => 'MediaWiki default',
-					'reason' => wfMessage( 'blockasn-proxyblockreason', $ret )->text(),
-					'allowUsertalk' => true,
-					'createAccount' => true, // this BLOCKS account creation
+					'reason' => new Message( 'blockasn-proxyblockreason', [ $ret ] ),
 					'systemBlock' => 'usertype-block'
 				] );
-				$user->mBlockedby = $user->mBlock->getByName();
-				$user->mBlockreason = $user->mBlock->mReason;
-				$user->mHideName = $user->mBlock->mHideName;
-				$user->mAllowUsertalk = !$user->mBlock->prevents( 'editownusertalk' );
-				return true;
 			}
 		}
 
-		return true;
-	}
-
-	private static function getData( $ip ) {
-		return self::get_cached_result( $ip, 'insights' );
-	}
-
-	private static function get_cached_result( $ip, $db = 'country', $cached_only = false ) {
-		// increment this to recache everything
-		$cache_epoch = 1;
-
-		// sanitized $db - we only allow country or insights for now
-		// rewrite omni to insights as it was renamed
-		if ( !in_array( $db, array( 'country', 'city', 'insights' ) ) ) {
-			return array( 'error' => 'UNKNOWN_DATABASE' );
+		$numBlocks = count( $asnBlocks );
+		if ( $numBlocks > 0 ) {
+			if ( $block === null ) {
+				if ( $numBlocks > 1 ) {
+					$block = new CompositeBlock( [
+						'address' => $ip,
+						'reason' => new Message( 'blockedtext-composite-reason' ),
+						'originalBlocks' => $asnBlocks,
+					] );
+				} else {
+					$block = $asnBlocks[0];
+				}
+			} elseif ( $block instanceof CompositeBlock ) {
+				$block = new CompositeBlock( [
+					'address' => $ip,
+					'reason' => new Message( 'blockedtext-composite-reason' ),
+					'originalBlocks' => array_merge( $asnBlocks, $block->getOriginalBlocks() ),
+				] );
+			} else {
+				$asnBlocks[] = $block;
+				$block = new CompositeBlock( [
+					'address' => $ip,
+					'reason' => new Message( 'blockedtext-composite-reason' ),
+					'originalBlocks' => $asnBlocks,
+				] );
+			}
 		}
+	}
+
+	/**
+	 * Retrieve data for the given IP.
+	 *
+	 * @param string $ip
+	 * @return array
+	 */
+	private static function getData( $ip ) {
 		// first check cache for the (ip, db) combo
 		// results are cached for 1 week
-		$cache = wfGetMainCache();
-		$cached_data = $cache->get( "geoip_{$db}_" . sha1( $ip ) );
+		$cache = ObjectCache::getLocalClusterInstance();
+		$cached_data = $cache->get( "geoip_" . sha1( $ip ) );
 
-		if ( $cached_data === false || !isset( $cached_data['cache_epoch'] ) || $cached_data['cache_epoch'] < $cache_epoch ) {
-			if ( $cached_only ) {
-				return array( 'error' => 'NOT_IN_CACHE' );
-			}
-			$data = self::geoip_request( $ip, $db );
+		if ( $cached_data === false ) {
+			$data = self::geoIPRequest( $ip, 'insights' );
 			// don't cache errors
 			if ( !isset( $data['error'] ) || $data['error'] == '' ) {
 				$data['cached_at'] = time();
-				$data['cache_epoch'] = $cache_epoch;
-				$cache->set( "geoip_{$db}_" . sha1( $ip ), $data, 60 * 60 * 24 * 7 );
+				$cache->set( "geoip_" . sha1( $ip ), $data, 60 * 60 * 24 * 7 );
 				$cached_data = $data;
 			} else {
 				// error
@@ -149,38 +153,34 @@ class BlockASN extends User {
 		}
 
 		// unset fields we don't want to expose
-		unset( $cached_data['cache_epoch'] );
 		unset( $cached_data['maxmind'] );
 
 		return $cached_data;
 	}
 
-	private static function geoip_request( $ip, $db = 'country' ) {
-		global $wgBAMMuser, $wgBAMMpass;
-		$auth = array(
-			'username' => $wgBAMMuser,
-			'password' => $wgBAMMpass
-		);
-
-		if ( $db === 'omni') {
-			$db = 'insights';
-		}
-		if ( !in_array( $db, array( 'country', 'city', 'insights' ) ) ) {
-			return array( 'error' => 'UNKNOWN_DATABASE' );
+	/**
+	 * Perform a geoip request to MaxMind
+	 *
+	 * @param string $ip
+	 * @param string $db
+	 * @return array
+	 */
+	private static function geoIPRequest( $ip, $db = 'country' ) {
+		if ( !in_array( $db, [ 'country', 'city', 'insights' ] ) ) {
+			return [ 'error' => 'UNKNOWN_DATABASE' ];
 		}
 
 		$query = "https://geoip.maxmind.com/geoip/v2.1/{$db}/{$ip}";
-		$ch = curl_init();
-		curl_setopt_array( $ch, array(
-			CURLOPT_URL => $query,
-			CURLOPT_USERAGENT => 'MaxMindQuery/2.1 PHP/' . PHP_VERSION,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-			CURLOPT_USERPWD => $auth['username'] . ':' . $auth['password'] ) );
-		$response = curl_exec( $ch );
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$httpFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$response = $httpFactory->get( $query, [
+			'userAgent' => 'MaxMindQuery/2.1 PHP/' . PHP_VERSION,
+			'username' => $config->get( 'BAMMuser' ),
+			'password' => $config->get( 'BAMMpass' )
+		], __METHOD__ );
 
-		if ( curl_errno( $ch ) ) {
-			return array( 'error' => 'CURL_ERROR' );
+		if ( $response === null ) {
+			return [ 'error' => 'REQUEST_ERROR' ];
 		}
 
 		// 2.x returns a JSON document, so parse that and return
