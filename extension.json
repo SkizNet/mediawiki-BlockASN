@@ -4,9 +4,9 @@
 	"author": [
 		"Ryan Schmidt"
 	],
-	"url": "https://www.mediawiki.org/wiki/Extension:BlockASN",
+	"url": "https://mwusers.org",
 	"descriptionmsg": "blockasn-desc",
-	"license-name": "MIT",
+	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
 		"MediaWiki": ">= 1.35.0"

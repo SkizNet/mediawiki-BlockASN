@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\Block\AbstractBlock;
 use MediaWiki\Block\CompositeBlock;
 use MediaWiki\Block\SystemBlock;
 use MediaWiki\MediaWikiServices;
