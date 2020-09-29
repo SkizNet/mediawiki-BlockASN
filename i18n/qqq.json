@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ryan Schmidt"
+		]
+	},
+	"blockasn-desc": "{{desc|name=BlockASN|url=https://www.mediawiki.org/wiki/Extension:BlockASN}}",
+	"blockasn-usertypeblockreason": "Block reason displayed to users who belong to a configured group, such as hosting, business or residential. $1 is the user type (e.g. hosting, business, residential) and cannot be translated at this time.",
+	"blockasn-asnblockreason": "Block reason displayed to users who belong to a blocked Autonomous System Number (ASN).",
+	"blockasn-proxyblockreason": "Block reason displayed to users who are using an IP anonymizer or VPN service."
+}

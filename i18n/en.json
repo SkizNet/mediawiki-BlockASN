@@ -1,4 +1,9 @@
 {
+	"@metadata": {
+		"authors": [
+			"Ryan Schmidt"
+		]
+	},
 	"blockasn-desc": "Block ASNs",
 	"blockasn-usertypeblockreason": "Your IP address is blocked due to it belonging to a disallowed IP type ($1).",
 	"blockasn-asnblockreason": "Your IP address belongs to a blocked ASN.",
