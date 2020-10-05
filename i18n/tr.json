@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"MuratTheTurkish"
+		]
+	},
+	"blockasn-desc": "Engel ASN'leri",
+	"blockasn-usertypeblockreason": "IP adresiniz, izin verilmeyen bir IP türüne ($1) ait olduğunuz için engellendi.",
+	"blockasn-asnblockreason": "IP adresiniz engellenmiş bir ASN'ye ait.",
+	"blockasn-proxyblockreason": "IP adresiniz, bir anonimleştiriciye veya VPN hizmetine ait olduğunuz için engellendi."
+}

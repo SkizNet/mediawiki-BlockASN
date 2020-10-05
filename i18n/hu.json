@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hanna Tardos"
+		]
+	},
+	"blockasn-proxyblockreason": "Ehhez az IP-címhez anonimizátor vagy VPN szolgáltatás tartozik, ezért blokkolva lett."
+}

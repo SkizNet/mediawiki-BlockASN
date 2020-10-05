@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gomoko"
+		]
+	},
+	"blockasn-desc": "ASN bloqués",
+	"blockasn-usertypeblockreason": "Votre adresse IP est bloquée parce qu’elle appartient à un type d’adresse IP interdit ($1).",
+	"blockasn-asnblockreason": "Votre adresse IP appartient à un ASN bloqué.",
+	"blockasn-proxyblockreason": "Votre adresse IP est bloquée parce qu’elle appartient à un service d’anonymisation ou VPN."
+}

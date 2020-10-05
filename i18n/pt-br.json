@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira"
+		]
+	},
+	"blockasn-desc": "Bloquear ASNs",
+	"blockasn-usertypeblockreason": "O seu endereço IP está bloqueado por pertencer a um tipo de IP não permitido ($1).",
+	"blockasn-asnblockreason": "Seu endereço IP pertence a um ASN bloqueado.",
+	"blockasn-proxyblockreason": "O seu endereço IP está bloqueado por pertencer a um anonimizador ou serviço VPN."
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"blockasn-desc": "封鎖 ASN",
+	"blockasn-usertypeblockreason": "因為您的 IP 位址屬於不被允許的 IP 類型（$1），因此已被封鎖。",
+	"blockasn-asnblockreason": "您的 IP 位址屬於被封鎖的 ASN。",
+	"blockasn-proxyblockreason": "因為您的 IP 位址屬於匿名或 VPN 設備，因此已被封鎖。"
+}
