@@ -4,5 +4,8 @@
 			"Hanna Tardos"
 		]
 	},
+	"blockasn-desc": "ASN-ek blokkolása",
+	"blockasn-usertypeblockreason": "IP-címed blokkolva lett, mivel a tiltott IP-k kategóriájába tartozik ($1).",
+	"blockasn-asnblockreason": "Az IP-címed egy blokkolt ASN-hez tartozik.",
 	"blockasn-proxyblockreason": "Ehhez az IP-címhez anonimizátor vagy VPN szolgáltatás tartozik, ezért blokkolva lett."
 }

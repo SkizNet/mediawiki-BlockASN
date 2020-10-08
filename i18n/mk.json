@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"blockasn-desc": "Блокирак ASN-и",
+	"blockasn-usertypeblockreason": "Вашата IP-адреса е блокирана бидејќи припаѓа на недозволен вид ($1).",
+	"blockasn-asnblockreason": "Вашата IP-адреса припаѓа на блокиран ASN.",
+	"blockasn-proxyblockreason": "Вашата IP-адреса е блокирана бидејќи припаѓа на анонимизатор или VPN-услужник."
+}
