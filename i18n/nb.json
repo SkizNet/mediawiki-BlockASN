@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"blockasn-desc": "Blokker ASN-er",
+	"blockasn-usertypeblockreason": "IP-adressa di er blokkert fordi den tilhører en ikke-tillatt IP-type ($1).",
+	"blockasn-asnblockreason": "IP-adressa di tilhører et blokkert ASN.",
+	"blockasn-proxyblockreason": "IP-adressa di er blokkert fordi den tilhører en anonymiserings- eller VPN-tjeneste."
+}
