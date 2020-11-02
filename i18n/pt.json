@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"blockasn-desc": "Bloquear ASN",
+	"blockasn-usertypeblockreason": "O seu endereço IP está bloqueado por pertencer a um tipo de IP não permitido ($1).",
+	"blockasn-asnblockreason": "O seu endereço IP pertence a um ASN bloqueado.",
+	"blockasn-proxyblockreason": "O seu endereço IP está bloqueado por pertencer a um serviço anonimizador ou a um serviço VPN."
+}
