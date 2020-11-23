@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"blockasn-desc": "Blockera ANS:er",
+	"blockasn-usertypeblockreason": "Din IP-adress är blockerad för att att den tillhör en otillåten IP-typ ($1).",
+	"blockasn-asnblockreason": "Din IP-adress tillhör en blockerad ASN.",
+	"blockasn-proxyblockreason": "Din IP-adress är blockerad för att den tillhör en anonymiserare eller VPN-tjänst."
+}
