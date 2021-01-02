@@ -39,11 +39,7 @@ class BlockASN {
 			}
 
 			if ( $ret !== -1 && in_array( $ret, $blockedUserTypes ) ) {
-				$asnBlocks[] = new SystemBlock( [
-					'address' => $ip,
-					'reason' => new Message( 'blockasn-usertypeblockreason', [ $ret ] ),
-					'systemBlock' => 'usertype-block'
-				] );
+				$asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-usertypeblockreason', $ret );
 			}
 
 			$ret = $data;
@@ -59,11 +55,7 @@ class BlockASN {
 			}
 
 			if ( $ret !== -1 && in_array( $ret, $blockedASNs ) ) {
-				$asnBlocks[] = new SystemBlock( [
-					'address' => $ip,
-					'reason' => new Message( 'blockasn-asnblockreason' ),
-					'systemBlock' => 'asn-block'
-				] );
+				$asnBlocks[] = $asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-asnblockreason', $ret );
 			}
 
 			$ret = $data;
@@ -91,11 +83,7 @@ class BlockASN {
 			}
 
 			if ( $ret === true ) {
-				$asnBlocks[] = new SystemBlock( [
-					'address' => $ip,
-					'reason' => new Message( 'blockasn-proxyblockreason', [ $ret ] ),
-					'systemBlock' => 'usertype-block'
-				] );
+				$asnBlocks[] = $asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-proxyblockreason', $ret );
 			}
 		}
 
@@ -126,6 +114,25 @@ class BlockASN {
 				] );
 			}
 		}
+	}
+
+	/**
+	 * Get a SystemBlock instance
+	 *
+	 * @param string $ip IP to block
+	 * @param string $message Message key
+	 * @param mixed $param Message parameter
+	 * @return SystemBlock
+	 */
+	private static function getSystemBlock( $ip, $message, $param ) {
+		$block = new SystemBlock( [
+			'address' => $ip,
+			'reason' => new Message( $message, [ $param ] ),
+			'systemBlock' => 'blockasn'
+		] );
+
+		$block->isCreateAccountBlocked( true );
+		return $block;
 	}
 
 	/**
