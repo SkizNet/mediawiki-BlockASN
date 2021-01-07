@@ -55,7 +55,7 @@ class BlockASN {
 			}
 
 			if ( $ret !== -1 && in_array( $ret, $blockedASNs ) ) {
-				$asnBlocks[] = $asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-asnblockreason', $ret );
+				$asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-asnblockreason', $ret );
 			}
 
 			$ret = $data;
@@ -83,7 +83,7 @@ class BlockASN {
 			}
 
 			if ( $ret === true ) {
-				$asnBlocks[] = $asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-proxyblockreason', $ret );
+				$asnBlocks[] = self::getSystemBlock( $ip, 'blockasn-proxyblockreason', $ret );
 			}
 		}
 
