@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"blockasn-desc": "Block ASN",
+	"blockasn-usertypeblockreason": "'U 'ndirizze IP tune jè bloccate purcé ste jndr'à le tipe de IP non conzendite ($1).",
+	"blockasn-asnblockreason": "'U 'ndirizze IP tune ha state bloccate da ASN.",
+	"blockasn-proxyblockreason": "'U 'ndirizze IP tune jè bloccate purcé ste jndr'à 'nu servizie de VPN o de anonimizzatore."
+}
