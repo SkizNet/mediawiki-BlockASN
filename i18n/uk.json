@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"DDPAT"
+		]
+	},
+	"blockasn-desc": "Блокувати ASN",
+	"blockasn-usertypeblockreason": "Ваша IP-адреса заблокована, оскільки вона належить до забороненого типу IP ($1).",
+	"blockasn-asnblockreason": "Ваша IP-адреса належить заблокованому ASN.",
+	"blockasn-proxyblockreason": "Ваша IP-адреса заблокована через належність до анонімайзера або послуги VPN."
+}
