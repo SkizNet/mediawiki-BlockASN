@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"列维劳德"
+		]
+	},
+	"blockasn-desc": "封禁 ASN",
+	"blockasn-usertypeblockreason": "您的 IP 地址已封禁，因为此地址属于禁止的 IP 类型 ($1)。",
+	"blockasn-asnblockreason": "您的 IP 地址属于封禁的 ASN。",
+	"blockasn-proxyblockreason": "您的 IP 地址已封禁，因为此地址属于匿名工具或 VPN 服务。"
+}
