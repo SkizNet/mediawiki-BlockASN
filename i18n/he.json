@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ex-Diktator"
+		]
+	},
+	"blockasn-desc": "חסימת ASN",
+	"blockasn-usertypeblockreason": "כתובת ה-IP שלך חסומה בשל השתייכותה לסוג IP אסור ($1)",
+	"blockasn-asnblockreason": "כתובת ה-IP שלך שייכת ל-ASN חסום.",
+	"blockasn-proxyblockreason": "כתובת ה-IP שלך חסומה בשל השתייכותה לשירות גלישה אלמונית או VPN."
+}
