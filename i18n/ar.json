@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"NEHAOUA"
+		]
+	},
+	"blockasn-desc": "حظر ASNs",
+	"blockasn-usertypeblockreason": "تم حظر عنوان الآي بي الخاص بك لأنه ينتمي إلى نوع  الآي بي غير مسموح به ($1).",
+	"blockasn-asnblockreason": "عنوان  الآي بي الخاص بك ينتمي إلى ASN الممنوع.",
+	"blockasn-proxyblockreason": "مُنع عنوان  الآي بي الخاص بك بسبب الانتماء إلى مجهول أو خدمة VPN."
+}
