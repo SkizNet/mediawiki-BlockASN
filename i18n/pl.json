@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Rail"
+		]
+	},
+	"blockasn-desc": "Blokuj ASN",
+	"blockasn-usertypeblockreason": "Twój adres IP został zablokowany, ponieważ przynależy do niedozwolonego rodzaju IP ($1).",
+	"blockasn-asnblockreason": "Twój adres IP przynależy do zablokowanego ASN.",
+	"blockasn-proxyblockreason": "Twój adres IP został zablokowany, ponieważ przynależy do proxy lub usługi VPN."
+}
