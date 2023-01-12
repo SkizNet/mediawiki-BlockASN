@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"blockasn-desc": "Blocar ASNs",
+	"blockasn-usertypeblockreason": "Tu adresse IP es blocate perque illo pertine a un typo IP non permittite ($1).",
+	"blockasn-asnblockreason": "Tu adresse IP pertine a un ASN blocate.",
+	"blockasn-proxyblockreason": "Tu adresse IP es blocate perque illo pertine a un servicio anonymisator o VPN."
+}

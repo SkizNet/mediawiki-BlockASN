@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"blockasn-desc": "Blokira ASN-je",
+	"blockasn-usertypeblockreason": "Vaš IP-naslov je blokiran, ker pripada nedovoljeni vrsti IP-jev ($1).",
+	"blockasn-asnblockreason": "Vaš IP-naslov pripada blokiranemu ASN-ju.",
+	"blockasn-proxyblockreason": "Vaš IP-naslov jeblokiran, ker pripada anonimizatorju ali storitvi VPN."
+}
