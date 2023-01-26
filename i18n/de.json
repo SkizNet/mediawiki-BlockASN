@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Justman10000"
+		]
+	},
+	"blockasn-desc": "ASNs blockieren",
+	"blockasn-usertypeblockreason": "Deine IP-Adresse ist gesperrt, weil sie zu einem nicht erlaubten IP-Typ gehört ($1).",
+	"blockasn-asnblockreason": "Deine IP-Adresse gehört zu einem gesperrten ASN.",
+	"blockasn-proxyblockreason": "Deine IP-Adresse ist blockiert, weil du zu einem Anonymisierungs- oder VPN-Dienst gehörst."
+}
