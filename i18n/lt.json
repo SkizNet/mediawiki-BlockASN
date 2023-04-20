@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"blockasn-usertypeblockreason": "Jūsų IP adresas užblokuotas, nes jis priklauso neleidžiamam IP tipui ($1).",
+	"blockasn-proxyblockreason": "Jūsų IP adresas užblokuotas, nes priklausote anonimizatoriui arba VPN paslaugai."
+}
