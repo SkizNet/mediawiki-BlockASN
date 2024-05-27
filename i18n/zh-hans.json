@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"LittlePaw365",
 			"列维劳德"
 		]
 	},
-	"blockasn-desc": "封禁 ASN",
-	"blockasn-usertypeblockreason": "您的 IP 地址已封禁，因为此地址属于禁止的 IP 类型 ($1)。",
-	"blockasn-asnblockreason": "您的 IP 地址属于封禁的 ASN。",
-	"blockasn-proxyblockreason": "您的 IP 地址已封禁，因为此地址属于匿名工具或 VPN 服务。"
+	"blockasn-desc": "封禁ASN",
+	"blockasn-usertypeblockreason": "您的IP地址受到封禁，因为它属于不允许的IP类型（$1）。",
+	"blockasn-asnblockreason": "您的IP地址属于受封禁的ASN。",
+	"blockasn-proxyblockreason": "您的IP地址受到封禁，因为它属于匿名器或VPN服务。"
 }
