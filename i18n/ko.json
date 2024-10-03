@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Suleiman the Magnificent Television"
+			"Suleiman the Magnificent Television",
+			"Ykhwong"
 		]
 	},
+	"blockasn-usertypeblockreason": "당신의 IP 주소는 허용되지 않는 IP 유형($1)에 속하기 때문에 차단되었습니다.",
 	"blockasn-asnblockreason": "당신의 IP 주소는 차단된 ASN에 속합니다.",
 	"blockasn-proxyblockreason": "귀하의 IP 주소는 익명화 또는 VPN 서비스에 속해 있기 때문에 차단됩니다."
 }
