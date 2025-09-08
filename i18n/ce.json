@@ -5,5 +5,7 @@
 		]
 	},
 	"blockasn-desc": "Блок АСН-ш",
-	"blockasn-asnblockreason": "Хьан IP-адрес блоктоьхначу ASN-н йукъадогӀуш ду."
+	"blockasn-usertypeblockreason": "Хьан IP-адресна блоктоьхна, иза магош доцчу ($1) IP-тайпанан хилар бахьана долуш.",
+	"blockasn-asnblockreason": "Хьан IP-адрес блоктоьхначу ASN-н йукъадогӀуш ду.",
+	"blockasn-proxyblockreason": "Хьан IP-адресан блоктоьхна анонимизаторан йа VPN сервисан йукъадогӀуш хилар бахьана долуш."
 }
