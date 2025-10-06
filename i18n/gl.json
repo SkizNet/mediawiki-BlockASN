@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"blockasn-desc": "Bloquear números de sistema autónomo (ASN)",
+	"blockasn-usertypeblockreason": "O teu enderezo IP está bloqueado porque pertence a un tipo de IP non permitido ($1).",
+	"blockasn-asnblockreason": "O teu enderezo IP pertence a un número de sistema autónomo (ASN) bloqueado.",
+	"blockasn-proxyblockreason": "O teu enderezo IP está bloqueado por pertencer a un servizo anonimizador ou VPN."
+}
