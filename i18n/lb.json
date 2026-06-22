@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Volvox"
+		]
+	},
+	"blockasn-desc": "ASNe spären",
+	"blockasn-usertypeblockreason": "Är IP-Adress ass gespaart, well se zu engem net erlaabten IP-Typ gehéiert ($1).",
+	"blockasn-asnblockreason": "Är IP-Adress gehéiert zu engem gespaarten ASN.",
+	"blockasn-proxyblockreason": "Är IP-Adress ass gespaart, well se zu engem Anonymiséierungs- oder VPN-Service gehéiert."
+}
