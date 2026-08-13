@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bachounda"
+		]
+	},
+	"blockasn-desc": "منع ASNs",
+	"blockasn-usertypeblockreason": "عنوان الآيبي تاعك محجوب حيت هو تابع لنوع آيبي ممنوع ($1).",
+	"blockasn-asnblockreason": "عنوان الآيبي تاعك تابع لـ ASN محجوب.",
+	"blockasn-proxyblockreason": "عنوان الآيبي تاعك محجوب حيت هو تابع لخدمة إخفاء الهوية ولا VPN."
+}
