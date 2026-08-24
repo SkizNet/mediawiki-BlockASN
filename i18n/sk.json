@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"blockasn-desc": "Blokovanie ASN",
+	"blockasn-usertypeblockreason": "Vaša IP adresa je zablokovaná, pretože patrí k nepovolenému typu IP ($1).",
+	"blockasn-asnblockreason": "Vaša IP adresa patrí k zablokovanému ASN.",
+	"blockasn-proxyblockreason": "Vaša IP adresa je zablokovaná, pretože patrí anonymizačnej službe alebo službe VPN."
+}
